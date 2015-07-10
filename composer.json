@@ -1,0 +1,30 @@
+{
+    "name": "andyjessop/bolt-extension-survey-monkey",
+    "description": "Adapter for the Survey Monkey API",
+    "type": "bolt-extension",
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Jessop",
+            "email": "andy@radixwebdesign.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\AndyJessop\\SurveyMonkey\\": [
+				"",
+				"src"
+			]
+        }
+    },
+
+    "extra": {
+        "bolt-assets": "assets"
+    }
+}
