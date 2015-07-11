@@ -84,34 +84,7 @@ class Extension extends BaseExtension
     {
         return "SurveyMonkey";
     }
-
-    /**
-     * Get a list of current surveys
-     * Updates from Survey Monkey API if not updated in last hour
-     * 
-     * @return json     list of surveys
-     */
-    public function get_surveys()
-    {
-        // Find out if files have been updated in last hour
-        $last_updated = $this->get_surveys_last_updated_time();
-
-        $current_date_time = new \DateTime('now');
-        $interval_in_seconds = $current_date_time->getTimestamp() - $last_updated->getTimestamp();
-
-        if ($interval_in_seconds > 3600)
-        {
-            // Update cached files from SM
-            $updated = $this->update_cached_surveys();
-        }
-
-        // Cached files are now up to date, so let's get them and return the list
-        $list = $this->get_cached_list();
-
-        $response = $this->app->json($list);
-        return $response;
-    }
-
+    
     /**
      * Retrieve an individual survey
      * 
@@ -142,6 +115,33 @@ class Extension extends BaseExtension
         }
 
         $response = $this->app->json($survey);
+        return $response;
+    }
+
+    /**
+     * Get a list of current surveys
+     * Updates from Survey Monkey API if not updated in last hour
+     * 
+     * @return json     list of surveys
+     */
+    public function get_surveys()
+    {
+        // Find out if files have been updated in last hour
+        $last_updated = $this->get_surveys_last_updated_time();
+
+        $current_date_time = new \DateTime('now');
+        $interval_in_seconds = $current_date_time->getTimestamp() - $last_updated->getTimestamp();
+
+        if ($interval_in_seconds > 3600)
+        {
+            // Update cached files from SM
+            $updated = $this->update_cached_surveys();
+        }
+
+        // Cached files are now up to date, so let's get them and return the list
+        $list = $this->get_cached_list();
+
+        $response = $this->app->json($list);
         return $response;
     }
 
